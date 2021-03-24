@@ -20,14 +20,15 @@ public class MyUtil {
     };
 
     public static void test(Predicate<Long> predicate, String testTitle) {
-        long start = System.nanoTime();
         System.out.println(ColorUtil.colorFont("\n开始测试: " + testTitle, ColorCons.F_G));
         System.out.println(ColorUtil.colorFont("------------------------------------", ColorCons.F_B_H));
+        long start = System.nanoTime();
         boolean result = predicate.test(start);
+        long res = System.nanoTime() - start;
         System.out.println(ColorUtil.colorFont("\n------------------------------------", ColorCons.F_B_H));
         System.out.print(ColorUtil.colorFont("结束测试, 结果: ", ColorCons.F_G));
         System.out.print(ColorUtil.colorFont(result + "", ColorCons.F_Y));
         System.out.print(ColorUtil.colorFont(" 耗时: ", ColorCons.F_G));
-        System.out.println(ColorUtil.colorFont((System.nanoTime() - start) + "ns", ColorCons.F_R));
+        System.out.println(ColorUtil.colorFont(res + "ns", ColorCons.F_R));
     }
 }
