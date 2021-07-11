@@ -1,4 +1,4 @@
-package com.helltab.tree;
+package com.helltab.DSA.tree;
 
 import java.util.Stack;
 import java.util.function.Consumer;
@@ -85,6 +85,9 @@ public class CombineBinTree {
         }
         Stack<TreeNode> stack = new Stack<>();
         stack.push(root);
+        try {
+        }catch (Exception e) {
+        }
         while (!stack.isEmpty()) {
             TreeNode node = stack.pop();
             visit.accept(node.val + "\t");

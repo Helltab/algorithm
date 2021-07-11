@@ -31,4 +31,23 @@ public class MyUtil {
         System.out.print(ColorUtil.colorFont(" 耗时: ", ColorCons.F_G));
         System.out.println(ColorUtil.colorFont(res + "ns", ColorCons.F_R));
     }
+    public static void visitRecursion(Object info, boolean in) {
+        if(in) {
+            printIndent(count++);
+            System.out.print("in " + info);
+        } else {
+            printIndent(count--);
+            System.out.print("return " + info);
+        }
+    }
+    // 全局变量，记录递归函数的递归层数
+    static int count = 0;
+
+    // 输入 n，打印 n 个 tab 缩进
+    static void printIndent(int n) {
+        System.out.println();
+        for (int i = 0; i < n; i++) {
+            System.out.print("   ");
+        }
+    }
 }

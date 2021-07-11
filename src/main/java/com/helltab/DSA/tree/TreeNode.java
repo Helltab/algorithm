@@ -1,4 +1,4 @@
-package com.helltab.tree;
+package com.helltab.DSA.tree;
 
 public class TreeNode {
     public int val;

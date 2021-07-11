@@ -1,4 +1,4 @@
-package com.helltab.tree.leetcode;
+package com.helltab.DSA.tree.leetcode;
 
 import java.util.Deque;
 import java.util.LinkedList;
