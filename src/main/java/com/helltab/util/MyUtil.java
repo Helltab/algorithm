@@ -49,5 +49,6 @@ public class MyUtil {
         for (int i = 0; i < n; i++) {
             System.out.print("   ");
         }
+//        System.out.println(ColorUtil.colorFont((System.nanoTime() - start) + "ns", ColorCons.F_R));
     }
 }
