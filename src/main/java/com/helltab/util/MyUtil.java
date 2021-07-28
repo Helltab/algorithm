@@ -31,24 +31,27 @@ public class MyUtil {
         System.out.print(ColorUtil.colorFont(" 耗时: ", ColorCons.F_G));
         System.out.println(ColorUtil.colorFont(res + "ns", ColorCons.F_R));
     }
-    public static void visitRecursion(Object info, boolean in) {
-        if(in) {
-            printIndent(count++);
-            System.out.print("in " + info);
-        } else {
-            printIndent(count--);
-            System.out.print("return " + info);
+
+    public static void printArray(int[] array) {
+        for (int t : array) {
+            System.out.print(t + "\t");
+        }
+        System.out.println();
+    }
+
+    public static <T> void printArray(T[] array) {
+        for (T t : array) {
+            System.out.print(t + "\t");
         }
     }
-    // 全局变量，记录递归函数的递归层数
-    static int count = 0;
 
-    // 输入 n，打印 n 个 tab 缩进
-    static void printIndent(int n) {
-        System.out.println();
-        for (int i = 0; i < n; i++) {
-            System.out.print("   ");
+
+    public static void switchArrayData(int[] array, int a, int b) {
+        if (a == b) {
+            return;
         }
-//        System.out.println(ColorUtil.colorFont((System.nanoTime() - start) + "ns", ColorCons.F_R));
+        array[a] = array[a] ^ array[b];
+        array[b] = array[a] ^ array[b];
+        array[a] = array[a] ^ array[b];
     }
 }

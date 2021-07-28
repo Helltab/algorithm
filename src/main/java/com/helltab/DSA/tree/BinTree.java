@@ -16,31 +16,31 @@ import static com.helltab.util.MyUtil.test;
 import static com.helltab.util.MyUtil.visit;
 
 public class BinTree {
-    public TNode<Character> root;
+    public TNode root;
 
     public BinTree() {
-//        root = new TNode<>('a');
-//        TNode<Character> b = new TNode<>('b');
-//        TNode<Character> c = new TNode<>('c');
-//        TNode<Character> d = new TNode<>('d');
-//        TNode<Character> e = new TNode<>('e');
-//        TNode<Character> f = new TNode<>('f');
-//        TNode<Character> g = new TNode<>('g');
+//        root = new TNode('a');
+//        TNode b = new TNode('b');
+//        TNode c = new TNode('c');
+//        TNode d = new TNode('d');
+//        TNode e = new TNode('e');
+//        TNode f = new TNode('f');
+//        TNode g = new TNode('g');
 //        root.left = b;
 //        root.right = c;
 //        c.left = d;
 //        c.right = f;
 //        d.right = e;
 //        f.left = g;
-        root = new TNode<>('+');
-        TNode<Character> b = new TNode<>('*');
-        TNode<Character> c = new TNode<>('/');
-        TNode<Character> d = new TNode<>('+');
-        TNode<Character> e = new TNode<>('c');
-        TNode<Character> f = new TNode<>('d');
-        TNode<Character> g = new TNode<>('f');
-        TNode<Character> h = new TNode<>('a');
-        TNode<Character> i = new TNode<>('b');
+        root = new TNode('+');
+        TNode b = new TNode('*');
+        TNode c = new TNode('/');
+        TNode d = new TNode('+');
+        TNode e = new TNode('c');
+        TNode f = new TNode('d');
+        TNode g = new TNode('f');
+        TNode h = new TNode('a');
+        TNode i = new TNode('b');
         root.left = b;
         root.right = c;
         b.left = d;
@@ -91,12 +91,12 @@ public class BinTree {
     }
 
     public static void testRebuild() {
-        char[] pre = {'a', 'b', 'c', 'd', 'e', 'f', 'g'};
-        char[] in = {'d', 'c', 'e', 'b', 'f', 'a', 'g'};
-        char[] post = {'d', 'e', 'c', 'f', 'b', 'g', 'a'};
+        Object[] pre = {'a', 'b', 'c', 'd', 'e', 'f', 'g'};
+        Object[] in = {'d', 'c', 'e', 'b', 'f', 'a', 'g'};
+        Object[] post = {'d', 'e', 'c', 'f', 'b', 'g', 'a'};
         test(s -> {
-            TNode<Character> rebuildTree = rebuildTreeByPreIn(pre, in);
-            TNode<Character> rebuildTree2 = rebuildTreeByPostIn(post, in);
+            TNode rebuildTree = rebuildTreeByPreIn(pre, in, null);
+            TNode rebuildTree2 = rebuildTreeByPostIn(post, in);
             preOrder(rebuildTree);
             System.out.println();
             preOrder(rebuildTree2);
@@ -106,16 +106,16 @@ public class BinTree {
 
     public static void testSearchTree() {
         test(s -> {
-            TNode<Integer> searchTree = new TNode<>(1);
-            BiPredicate<Integer, Integer> compare = (a, b) -> b < a;
-            searchTree.addSearchNode(new TNode<>(20), compare);
-            searchTree.addSearchNode(new TNode<>(30), compare);
-            searchTree.addSearchNode(new TNode<>(2), compare);
-            searchTree.addSearchNode(new TNode<>(5), compare);
-            searchTree.addSearchNode(new TNode<>(45), compare);
-            searchTree.addSearchNode(new TNode<>(3), compare);
-            searchTree.addSearchNode(new TNode<>(-5), compare);
-            searchTree.addSearchNode(new TNode<>(88), compare);
+            TNode searchTree = new TNode(1);
+            BiPredicate<Object, Object> compare = (a, b) -> Integer.parseInt(b.toString()) < Integer.parseInt(a.toString());
+            searchTree.addSearchNode(new TNode(20), compare);
+            searchTree.addSearchNode(new TNode(30), compare);
+            searchTree.addSearchNode(new TNode(2), compare);
+            searchTree.addSearchNode(new TNode(5), compare);
+            searchTree.addSearchNode(new TNode(45), compare);
+            searchTree.addSearchNode(new TNode(3), compare);
+            searchTree.addSearchNode(new TNode(-5), compare);
+            searchTree.addSearchNode(new TNode(88), compare);
             preOrderInt(searchTree);
             System.out.println();
             inOrderInt(searchTree);
@@ -130,7 +130,7 @@ public class BinTree {
 
     public static void testAVLTree() {
         test(s -> {
-            TNode<Integer> avlTree = new TNode<>(4);
+            TNode avlTree = new TNode(4);
             avlTree.addAVLNode(2);
             avlTree.addAVLNode(1);
             avlTree.addAVLNode(3);
@@ -172,21 +172,21 @@ public class BinTree {
         testAVLTree();
     }
 
-    public static void preOrderInt(TNode<Integer> root) {
+    public static void preOrderInt(TNode root) {
         if (root == null) return;
         root.visit();
         preOrderInt(root.left);
         preOrderInt(root.right);
     }
 
-    public static void inOrderInt(TNode<Integer> root) {
+    public static void inOrderInt(TNode root) {
         if (root == null) return;
         inOrderInt(root.left);
         root.visit();
         inOrderInt(root.right);
     }
 
-    public static void preOrder(TNode<Character> root) {
+    public static void preOrder(TNode root) {
         if (root == null) return;
         root.visit();
         preOrder(root.left);
@@ -198,12 +198,12 @@ public class BinTree {
      *
      * @param root
      */
-    public static void preOrder1(TNode<Character> root) {
+    public static void preOrder1(TNode root) {
         if (root == null) return;
-        Stack<TNode<Character>> stack = new Stack<>();
+        Stack<TNode> stack = new Stack<>();
         stack.push(root);
         while (!stack.isEmpty()) {
-            TNode<Character> node = stack.pop();
+            TNode node = stack.pop();
             node.visit();
             if (node.hasRC()) stack.push(node.right);
             if (node.hasLC()) stack.push(node.left);
@@ -215,9 +215,9 @@ public class BinTree {
      *
      * @param root
      */
-    public static void preOrder2(TNode<Character> root) {
+    public static void preOrder2(TNode root) {
         if (root == null) return;
-        Stack<TNode<Character>> stack = new Stack<>();
+        Stack<TNode> stack = new Stack<>();
         while (true) {
             visitAlongLeft(root, stack);
             if (stack.isEmpty()) {
@@ -227,7 +227,7 @@ public class BinTree {
         }
     }
 
-    private static void visitAlongLeft(TNode<Character> root, Stack<TNode<Character>> stack) {
+    private static void visitAlongLeft(TNode root, Stack<TNode> stack) {
         while (root != null) {
             root.visit();
             stack.push(root.right);
@@ -235,7 +235,7 @@ public class BinTree {
         }
     }
 
-    public static void inOrder(TNode<Character> root) {
+    public static void inOrder(TNode root) {
         if (root == null) return;
         inOrder(root.left);
         root.visit();
@@ -249,27 +249,27 @@ public class BinTree {
      *
      * @param root
      */
-    public static void inOrder1(TNode<Character> root) {
-        Stack<TNode<Character>> stack = new Stack<>();
+    public static void inOrder1(TNode root) {
+        Stack<TNode> stack = new Stack<>();
         while (true) {
             goAlongLeft(root, stack);
             if (stack.isEmpty()) {
                 break;
             }
-            TNode<Character> top = stack.pop();
+            TNode top = stack.pop();
             top.visit();
             root = top.right;
         }
     }
 
-    private static void goAlongLeft(TNode<Character> root, Stack<TNode<Character>> stack) {
+    private static void goAlongLeft(TNode root, Stack<TNode> stack) {
         while (root != null) {
             stack.push(root);
             root = root.left;
         }
     }
 
-    public static void postOrder(TNode<Character> root) {
+    public static void postOrder(TNode root) {
         if (root == null) return;
         postOrder(root.left);
         postOrder(root.right);
@@ -282,12 +282,12 @@ public class BinTree {
      *
      * @param root
      */
-    public static void postOrder2(TNode<Character> root) {
+    public static void postOrder2(TNode root) {
         if (root == null) return;
-        Stack<TNode<Character>> stack = new Stack<>();
+        Stack<TNode> stack = new Stack<>();
         while (true) {
             goAlongLeft(root, stack);
-            TNode<Character> top = stack.peek();
+            TNode top = stack.peek();
             if ((top.right == null || top.right.isVisit()) && (top.left == null || top.left.isVisit())) {
                 top.visit();
                 stack.pop();
@@ -300,7 +300,7 @@ public class BinTree {
     }
 
 
-    public static void reset(TNode<Character> root) {
+    public static void reset(TNode root) {
         if (root == null) return;
         root.reset();
         reset(root.left);
@@ -310,9 +310,9 @@ public class BinTree {
     /**
      * 根据前序遍历和中序遍历还原树
      */
-    public static TNode<Character> rebuildTreeByPreIn(char[] pre, char[] in) {
+    public static TNode rebuildTreeByPreIn(Object[] pre, Object[] in, TNode parent) {
         if (pre == null || in == null || in.length == 0 || pre.length != in.length) return null;
-        char root = pre[0];
+        Object root = pre[0];
         int rootIndex = -1;
         for (int i = 0; i < in.length; i++) {
             if (in[i] == root) {
@@ -321,26 +321,29 @@ public class BinTree {
         }
         if (rootIndex == -1) return null;
         //首先找到根节点
-        TNode<Character> rootNode = new TNode<>(root);
+        TNode rootNode = new TNode(root);
+        if(null != parent) {
+            rootNode.parent = parent;
+        }
         // 找到中序遍历的左子树
-        char[] inLeft = Arrays.copyOfRange(in, 0, rootIndex);
+        Object[] inLeft = Arrays.copyOfRange(in, 0, rootIndex);
         // !!! 左子树的数量肯定是相同的
-        char[] preLeft = Arrays.copyOfRange(pre, 1, rootIndex + 1);
+        Object[] preLeft = Arrays.copyOfRange(pre, 1, rootIndex + 1);
 
-        char[] inRight = Arrays.copyOfRange(in, rootIndex + 1, in.length);
-        char[] preRight = Arrays.copyOfRange(pre, rootIndex + 1, pre.length);
+        Object[] inRight = Arrays.copyOfRange(in, rootIndex + 1, in.length);
+        Object[] preRight = Arrays.copyOfRange(pre, rootIndex + 1, pre.length);
 
-        rootNode.left = rebuildTreeByPreIn(preLeft, inLeft);
-        rootNode.right = rebuildTreeByPreIn(preRight, inRight);
+        rootNode.left = rebuildTreeByPreIn(preLeft, inLeft, rootNode);
+        rootNode.right = rebuildTreeByPreIn(preRight, inRight, rootNode);
         return rootNode;
     }
 
     /**
      * 根据后序遍历和中序遍历还原树
      */
-    public static TNode<Character> rebuildTreeByPostIn(char[] post, char[] in) {
+    public static TNode rebuildTreeByPostIn(Object[] post, Object[] in) {
         if (post == null || in == null || in.length == 0 || post.length != in.length) return null;
-        char root = post[post.length - 1];
+        Object root = post[post.length - 1];
         int rootIndex = -1;
         for (int i = 0; i < in.length; i++) {
             if (in[i] == root) {
@@ -349,13 +352,13 @@ public class BinTree {
         }
         if (rootIndex == -1) return null;
         //首先找到根节点
-        TNode<Character> rootNode = new TNode<>(root);
+        TNode rootNode = new TNode(root);
         // 找到中序遍历的左子树
-        char[] inLeft = Arrays.copyOfRange(in, 0, rootIndex);
+        Object[] inLeft = Arrays.copyOfRange(in, 0, rootIndex);
         // !!! 左子树的数量肯定是相同的
-        char[] postLeft = Arrays.copyOfRange(post, 0, rootIndex);
-        char[] inRight = Arrays.copyOfRange(in, rootIndex + 1, in.length);
-        char[] postRight = Arrays.copyOfRange(post, rootIndex, rootIndex + 1);
+        Object[] postLeft = Arrays.copyOfRange(post, 0, rootIndex);
+        Object[] inRight = Arrays.copyOfRange(in, rootIndex + 1, in.length);
+        Object[] postRight = Arrays.copyOfRange(post, rootIndex, rootIndex + 1);
         rootNode.left = rebuildTreeByPostIn(postLeft, inLeft);
         rootNode.right = rebuildTreeByPostIn(postRight, inRight);
         return rootNode;
@@ -370,12 +373,12 @@ public class BinTree {
 
 }
 
-class TNode<T> implements Comparable {
-    public T data;
-    public TNode<T> parent;
-    public TNode<T> left;
-    public TNode<T> right;
-    private boolean visitFlag;
+class TNode implements Comparable {
+    public Object data;
+    public TNode parent;
+    public TNode left;
+    public TNode right;
+    private boolean visitFlag = false;
 
     @Override
     public String toString() {
@@ -397,7 +400,7 @@ class TNode<T> implements Comparable {
      * @param node
      * @param compare
      */
-    public void addSearchNode(TNode<T> node, BiPredicate<T, T> compare) {
+    public void addSearchNode(TNode node, BiPredicate<Object, Object> compare) {
         if (node.data.equals(data)) {
             return;
         }
@@ -425,16 +428,16 @@ class TNode<T> implements Comparable {
      * 如果是单叶子节点, 叶子替换
      * 如果是双叶子节点, 中序遍历, 用后继来替换
      */
-    public void delSearchNode(T data) {
-        Stack<TNode<T>> stack = new Stack<>();
-        TNode<T> node = this;
-        TNode<T> target = null;
+    public void delSearchNode(Object data) {
+        Stack<TNode> stack = new Stack<>();
+        TNode node = this;
+        TNode target = null;
         while (true) {
             goAlongLeft(node, stack);
             if (stack.isEmpty()) break;
-            TNode<T> pop = stack.pop();
+            TNode pop = stack.pop();
             if (target != null) {
-                T temp = target.data;
+                Object temp = target.data;
                 target.data = pop.data;
                 pop.data = temp;
             }
@@ -459,7 +462,7 @@ class TNode<T> implements Comparable {
         }
     }
 
-    private void goAlongLeft(TNode<T> node, Stack<TNode<T>> stack) {
+    private void goAlongLeft(TNode node, Stack<TNode> stack) {
         while (node != null) {
             stack.push(node);
             node = node.left;
@@ -474,11 +477,11 @@ class TNode<T> implements Comparable {
      *
      * @param data
      */
-    public void addAVLNode(T data) {
+    public void addAVLNode(Object data) {
         if (binSearch(data) != null) {
             return;
         }
-        TNode<T> newNode = new TNode<>(data);
+        TNode newNode = new TNode(data);
         if (this.compareTo(data) > 0) {
             if (hasLC()) {
                 left.addAVLNode(data);
@@ -504,9 +507,9 @@ class TNode<T> implements Comparable {
      * *           /   \           /   \
      * *         d      e        b      d
      */
-    public TNode<T> leftRotation(TNode<T> avlNode) {
+    public TNode leftRotation(TNode avlNode) {
         if (avlNode != null && avlNode.hasRC()) {
-            TNode<T> right = avlNode.right;
+            TNode right = avlNode.right;
             if (right.hasLC()) {
                 avlNode.right = right.left;
                 right.left.parent = avlNode;
@@ -538,9 +541,9 @@ class TNode<T> implements Comparable {
      * *    /   \                         /  \
      * *   f     d                      d     c
      */
-    public TNode<T> rightRotation(TNode<T> avlNode) {
+    public TNode rightRotation(TNode avlNode) {
         if (avlNode != null && avlNode.hasLC()) {
-            TNode<T> left = avlNode.left;
+            TNode left = avlNode.left;
             // 迁移左节点的右孩子到当前节点的左孩子
             if (left.hasRC()) {
                 avlNode.left = left.right;
@@ -571,12 +574,12 @@ class TNode<T> implements Comparable {
     /**
      * 查找
      */
-    public TNode<T> search(T t) {
-        TNode<T> root = getRoot();
-        Stack<TNode<T>> stack = new Stack<>();
+    public TNode search(Object t) {
+        TNode root = getRoot();
+        Stack<TNode> stack = new Stack<>();
         stack.push(root);
         while (!stack.isEmpty()) {
-            TNode<T> pop = stack.pop();
+            TNode pop = stack.pop();
             if (pop.data.equals(t)) {
                 return pop;
             }
@@ -586,8 +589,8 @@ class TNode<T> implements Comparable {
         return null;
     }
 
-    public TNode<T> getRoot() {
-        TNode<T> root = this;
+    public TNode getRoot() {
+        TNode root = this;
         while (root.parent != null) {
             root = root.parent;
         }
@@ -597,8 +600,8 @@ class TNode<T> implements Comparable {
     /**
      * 二叉查找
      */
-    public TNode<T> binSearch(T t) {
-        TNode<T> root = getRoot();
+    public TNode binSearch(Object t) {
+        TNode root = getRoot();
         while (root != null) {
             // 比当前节点小
             if (root.compareTo(t) > 0) {
@@ -617,16 +620,21 @@ class TNode<T> implements Comparable {
      *
      * @param data
      */
-    public void levelTraver(T data) {
-        // 根据值搜索出对应的节点
-        TNode<T> node = search(data);
+    public void levelTraver(Object data) {
+        TNode node = this;
+        if(null != data) {
+            // 根据值搜索出对应的节点
+            node = search(data);
+        } else {
+            data = this.data;
+        }
         if (node == null) return;
-        Deque<TNode<T>> path = new LinkedList<>();
+        Deque<TNode> path = new LinkedList<>();
         path.push(node);
-        List<List<TNode<T>>> all = new ArrayList<>();
-        List<TNode<T>> temp = new ArrayList<>();
+        List<List<TNode>> all = new ArrayList<>();
+        List<TNode> temp = new ArrayList<>();
         all.add(temp);
-        T maxData = data;
+        Object maxData = data;
         // 层次遍历
         while (true) {
             node = path.poll();
@@ -649,12 +657,12 @@ class TNode<T> implements Comparable {
         }
         // 补全为满二叉树
         for (int i = 0; i < all.size(); i++) {
-            List<TNode<T>> tNodes = all.get(i);
+            List<TNode> tNodes = all.get(i);
             if (i == 0) continue;
-            List<TNode<T>> pNodes = all.get(i - 1);
+            List<TNode> pNodes = all.get(i - 1);
             if (tNodes.size() != 1 << pNodes.size()) {
                 for (int i1 = 0; i1 < pNodes.size(); i1++) {
-                    TNode<T> pNode = pNodes.get(i1);
+                    TNode pNode = pNodes.get(i1);
                     if (pNode == null) {
                         tNodes.add(i1 << 1, null);
                         tNodes.add((i1 << 1) + 1, null);
@@ -687,17 +695,17 @@ class TNode<T> implements Comparable {
             }
         };
         for (int i = 0; i < all.size(); i++) {
-            List<TNode<T>> tNodes = all.get(i);
+            List<TNode> tNodes = all.get(i);
 
             // 画分支线
             if (i > 0) {
                 printStart.accept(i);
                 for (int i1 = 0; i1 < tNodes.size(); i1++) {
-                    TNode<T> tNode = tNodes.get(i1);
+                    TNode tNode = tNodes.get(i1);
                     // 处理补全二叉树的 null 值
                     if (tNode == null) {
                         if (i1 > 0) {
-                            TNode<T> tPre = tNodes.get(i1 - 1);
+                            TNode tPre = tNodes.get(i1 - 1);
                             // 如果 null 的左边节点是右节点, 需要补充打印一个间隔
                             //     8
                             // ╭┄┄┄┴┄┄┄╮(     )
@@ -710,7 +718,7 @@ class TNode<T> implements Comparable {
                         }
                         if (i1 < tNodes.size() - 1 && tNodes.get(i1 + 1) == null) {
                             if (i1 > 0) {
-                                TNode<T> tPre = tNodes.get(i1 - 1);
+                                TNode tPre = tNodes.get(i1 - 1);
                                 // 如果 null 的左边节点是右节点, 需要补充打印一个空串
                                 //     8
                                 // ╭┄┄┄┴┄┄┄╮      (    )
@@ -780,7 +788,7 @@ class TNode<T> implements Comparable {
 
             printStart.accept(i);
             // 打印数据
-            for (TNode<T> tNode : tNodes) {
+            for (TNode tNode : tNodes) {
                 if (tNode == null) {
                     System.out.print(ColorUtil.colorFont(format("null", blackNum), ColorCons.F_B_H));
                 } else {
@@ -912,7 +920,7 @@ class TNode<T> implements Comparable {
         return visitFlag;
     }
 
-    public TNode(T a) {
+    public TNode(Object a) {
         this.data = a;
         this.visitFlag = false;
         this.parent = null;
